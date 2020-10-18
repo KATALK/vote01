@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+		<title>登陆管理</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="css/style.css" th:href="@{/css/style.css}" rel='stylesheet' type='text/css' />
+
+	</head>
+	<body>
+<script type="text/javascript">
+	function formLogin(form) {
+		if (form.username.value==''){
+			alert("用户名为空，请输入用户名！")
+			form.username.focus();
+			return false;
+		}
+		if (form.password.value==''){
+			alert("密码为空，请输入密码！");
+			form.password.focus();
+			return false;
+		}
+		return true;
+	}
+</script>
+	<div class="main">
+		<div class="login">
+			<div class="inset">
+				<!--start-main-->
+				<form action="/user.do/login" method="post" name="form" onsubmit="return formLogin(this)">
+					<div>
+						<h2>管理登录</h2>
+						<span><label>用户名</label></span>
+						<span><input type="text"  name="username" id ="userName" class="textbox" ></span>
+						<span  th:unless="${#strings.isEmpty(msg)}" style="color: red" th:text="${msg}">错误</span>
+					</div>
+					<div>
+						<span><label>密码</label></span>
+						<span><input type="password" name="password" class="password"></span>
+					</div>
+					<div class="sign">
+						<input type="submit" value="登录" class="submit" />
+<!--						<div style="height: 15px;width: 10px;margin: 0 auto;text-align: center"><a href="/user.do/toRegister">注册</a></div>-->
+						<span style="text-align: center;margin: auto;background-color: paleturquoise;color: #125EB2"><a href="/user.do/index">返回首页</a></span>
+					</div>
+				</form>
+			</div>
+		</div>
+		<!--//end-main-->
+	</div>
+
+	<div class="copy-right">
+		<p>Edimen公司版权所有 &copy; 2020  </p>
+
+	</div>
+	</body>
+</html>

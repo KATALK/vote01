@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<title>登陆管理</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="/templates/css/style.css" rel='stylesheet' th:href="@{/templates/css/style.css}" type='text/css' />
+
+</head>
+<body>
+<script type="text/javascript">
+    function beforeSubmit(form) {
+        if(form.username.value==''){
+            alert("用户名不能为空");
+            form.username.focus();
+            return false;
+        }
+        if (form.password.value==''){
+            alert("密码不能为空");
+            form.password.focus();
+            return false;
+        }
+        if (form.password.value.length<6 || form.password.value.length>11){
+            alert("密码不能少于6位数或多于11位");
+            form.password.focus();
+            return false;
+        }
+        console.log(form.password.value.length);
+        return true;
+    }
+</script>
+<div class="main">
+    <div class="login">
+        <div class="inset">
+            <!--start-main-->
+            <form action="/user.do/toAddUser" method="post" name="form" onsubmit="return beforeSubmit(this)">
+                <div>
+                    <h2>注册</h2>
+                    <span><label>用户名</label></span>
+                    <span><input type="text"  name="username" id ="userName" class="textbox" ></span>
+                    <span  th:unless="${#strings.isEmpty(msg)}" style="color: red" th:text="${msg}">&nbsp;</span>
+                </div>
+                <div>
+                    <span><label>密码</label></span>
+                    <span><input type="password" name="password" class="password"></span>
+                </div>
+                <div class="sign">
+                    <input type="submit" value="注册" class="submit" />
+                </div>
+            </form>
+        </div>
+    </div>
+    <!--//end-main-->
+</div>
+
+<div class="copy-right">
+    <p>Edimen公司版权所有 &copy; 2020  </p>
+
+</div>
+</body>
+</html>
