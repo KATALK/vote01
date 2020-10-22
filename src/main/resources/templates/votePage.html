@@ -49,8 +49,8 @@
           <div class="ui attached  segment">
             <form method="post" action="/article.do/getVoteData" th:action="@{/article.do/getVoteData}" >
               <h2 th:text="${article.title}">xx</h2>
-              <input type="hidden" th:value="${article.id}" name="id">
-              <input th:each="article : ${article.options}" type="radio" th:text="${article.content}" th:value="${article.id}" name="contentId" checked>
+              <input type="hidden" th:value="${article.id}" name="articleId">
+              <input th:each="option : ${article.options}" type="radio" th:text="${option.content}" th:value="${option.id}" name="contentId" checked>
               <input type="submit" value="提交">
             </form>
 

@@ -104,9 +104,9 @@ public class ArticleController {
 
 
     @PostMapping("/getVoteData")
-    public String getVote(@RequestParam("contentId")Integer contentId,@RequestParam("id")int id,HttpSession session,
+    public String getVote(@RequestParam("contentId")Integer contentId,@RequestParam("articleId")int articleId,HttpSession session,
             RedirectAttributes  attributes){
-        Article article = articleService.selectArticleById(id);
+        Article article = articleService.selectArticleById(articleId);
         article.setCount(article.getCount()+1);//投票文章+1
         User u = (User)session.getAttribute("user");
         optionService.updateOptionNum(contentId);//更新选项被选中的次数

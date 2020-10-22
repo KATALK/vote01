@@ -42,9 +42,12 @@ public class UserController {
                         @RequestParam(value = "limit",defaultValue = "5")Integer limit, Model model,HttpSession session) {
         User user = (User)session.getAttribute("user");
         start = start <0 ? 0:start;
+        Sort sort02 = Sort.by(Sort.Direction.DESC,"count");
+        Pageable pageable02 = PageRequest.of(0,5,sort02);
+        model.addAttribute("articleListTwo",articleService.listArticle(pageable02));//根据投票数倒叙查询
         Sort sort = Sort.by(Sort.Direction.DESC,"createTime");
         Pageable pageable = PageRequest.of(start,limit,sort);
-        Page<Article> articlePage = articleService.listArticle(pageable);
+        Page<Article> articlePage = articleService.listArticle(pageable);//根据创建时间倒叙查询
         if (null!=user){
             List<Integer> articleIds = userService.selectArticleIdsByUsername(user.getUsername());
             if (articleIds.get(0)!=null){
@@ -59,9 +62,6 @@ public class UserController {
             }
         }
         model.addAttribute("articleList", articlePage);
-        Sort sort02 = Sort.by(Sort.Direction.DESC,"count");
-        Pageable pageable02 = PageRequest.of(0,5,sort02);
-        model.addAttribute("articleListTwo",articleService.listArticle(pageable02));
         return "index";
     }
     @GetMapping("/toLogin")

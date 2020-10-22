@@ -1,6 +1,7 @@
 package com.seventh.group.controller;
 
 import com.seventh.group.Entity.Article;
+import com.seventh.group.Entity.User;
 import com.seventh.group.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -35,7 +36,13 @@ public class indexController {
     public String index(@RequestParam(value = "start",defaultValue = "0")Integer start,
                         @RequestParam(value = "limit",defaultValue = "5")Integer limit,
                         Model model, HttpSession session) {
-        session.setAttribute("user",null);
+        User user = (User) session.getAttribute("user");
+        if (user==null){
+            session.setAttribute("user",null);
+        }else {
+            user.setPassword(null);
+            session.setAttribute("user",user);
+        }
         start = start <0 ? 0:start;
         Sort sort = Sort.by(Sort.Direction.DESC,"createTime");
         Pageable pageable = PageRequest.of(start,limit,sort);
