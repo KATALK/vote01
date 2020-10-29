@@ -9,24 +9,17 @@ import com.seventh.group.repository.ArticleRepository;
 import com.seventh.group.repository.OptionRepository;
 import com.seventh.group.repository.UserRepository;
 import com.seventh.group.service.ArticleService;
-import com.seventh.group.utils.DataUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import javax.annotation.Resources;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.stream.Stream;
 
 /**
  * @Author EdiMen
@@ -189,10 +182,11 @@ public class test {
 //        Optional<Article> byId = articleRepository.findById(9);
 //        List<Option> options = byId.get().getOptions();
 //        int a = 0;
-        articleRepository.deleteById(13);
-        articleRepository.deleteById(14);
-        articleRepository.deleteById(15);
-        articleRepository.deleteById(16);
+//        articleRepository.deleteById(13);
+//        articleRepository.deleteById(14);
+//        articleRepository.deleteById(15);
+//        articleRepository.deleteById(16);
+//        userRepository.deleteById(37);
 
     }
 }

@@ -12,6 +12,7 @@ import java.io.Serializable;
  * @Data 2020/9/10--15:04
  * @Version 1.0
  */
+@Data
 @Entity
 @Table(name = "t_option")
 public class Option implements Serializable {
@@ -28,44 +29,4 @@ public class Option implements Serializable {
     @JoinColumn(name = "article_id")
     private Article article;
 
-    public Option(String content, Article article,int num) {
-        this.content = content;
-        this.article = article;
-        this.num = num;
-    }
-
-    public Option() {
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public Article getArticle() {
-        return article;
-    }
-
-    public void setArticle(Article article) {
-        this.article = article;
-    }
-
-    public int getNum() {
-        return num;
-    }
-
-    public void setNum(int num) {
-        this.num = num;
-    }
 }

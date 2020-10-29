@@ -58,4 +58,9 @@ public class UserServiceImpl implements UserService {
     public User register(User user) {
         return userRepository.saveAndFlush(user);
     }
+
+    @Override
+    public void deleteUserById(Integer id) {
+        userRepository.deleteById(id);
+    }
 }

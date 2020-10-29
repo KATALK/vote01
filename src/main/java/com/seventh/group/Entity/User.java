@@ -15,7 +15,7 @@ import java.util.List;
  * @Data 2020/9/10--13:28
  * @Version 1.0
  */
-
+@Data
 @Entity
 @Table(name = "t_user")
 public class User implements Serializable {
@@ -33,89 +33,11 @@ public class User implements Serializable {
     private int status;//状态
 
     private long number;//投票数
-    @ManyToMany(cascade = CascadeType.ALL,targetEntity = Article.class,fetch = FetchType.EAGER)
-    @JoinTable(name = "user_article",joinColumns = {@JoinColumn(name = "user_id",referencedColumnName = "id")}
-            ,inverseJoinColumns = {@JoinColumn(name = "article_id",referencedColumnName = "id")})
+//    @ManyToMany(cascade = CascadeType.ALL,targetEntity = Article.class,fetch = FetchType.EAGER)
+//    @JoinTable(name = "user_article",joinColumns = {@JoinColumn(name = "user_id",referencedColumnName = "id")}
+//            ,inverseJoinColumns = {@JoinColumn(name = "article_id",referencedColumnName = "id")})
+    @ManyToMany(mappedBy = "users")
     private List<Article> articles = new ArrayList<>();
 
-    public User() {
-    }
 
-    public User(String username, @NotNull(message = "密码不能为空") String password, int type, int status, long number, List<Article> articles) {
-        this.username = username;
-        this.password = password;
-        this.type = type;
-        this.status = status;
-        this.number = number;
-        this.articles = articles;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public int getType() {
-        return type;
-    }
-
-    public void setType(int type) {
-        this.type = type;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    public long getNumber() {
-        return number;
-    }
-
-    public void setNumber(long number) {
-        this.number = number;
-    }
-
-    public List<Article> getArticles() {
-        return articles;
-    }
-
-    public void setArticles(List<Article> articles) {
-        this.articles = articles;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", type=" + type +
-                ", status=" + status +
-                ", number=" + number +
-                ", articles=" + articles +
-                '}';
-    }
 }

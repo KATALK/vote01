@@ -129,5 +129,14 @@ public class UserController {
         return "redirect:/";
     }
 
+    @GetMapping("/selectAllUser")
+    public String selectAllUser(Model model){
+        List<User> allUser = userService.findAllUser();
+
+        model.addAttribute("userList",allUser);
+        return "admin";
+    }
+
+
 }
 

@@ -19,4 +19,5 @@ public interface UserService {
     User selectByUsername(String username);
 
     List<Integer> selectArticleIdsByUsername(String username);
+    public void deleteUserById(Integer id);
 }

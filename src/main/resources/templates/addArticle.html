@@ -47,12 +47,28 @@
               form.title.focus();
               return false;
             }
-            if (form.content.value==''){
-              // alert("content内容为空！");
-              form.content.focus();
-              return false;
+            // if (form.content.value==''){
+            //   alert("content内容为空！");
+            //   form.content.focus();
+            //   return false;
+            // }
+            if (form.title.value!=''&form.content.value!=''){
+              var msg = "您真的确定要发布吗？\n\n请确认！";
+              if (confirm(msg)==true){
+                return true;
+              }else{
+                return false;
+              }
             }
             return true;
+          }
+          function del() {
+            var msg = "您真的确定要删除吗？\n\n请确认！";
+            if (confirm(msg)==true){
+              return true;
+            }else{
+              return false;
+            }
           }
         </script>
         <script>
@@ -88,6 +104,7 @@
 <!--            <input type="text" name="title" placeholder="请输入投票标题......"><br>-->
             <div class="field">
               <input type="text" name="title"  th:value="${title}" placeholder="请输入投票标题......"><br>
+              <input type="hidden" name="uid" th:value="${session.user.id}">
             </div>
             <a href="#"  id="AddMoreFileBox" class="btn btn-info">添加更多的选项</a></span></p>
             <div id="InputsWrapper"  class="field">

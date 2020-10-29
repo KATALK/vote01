@@ -15,9 +15,7 @@ public interface ArticleService {
 
     public void deleteArticle(int id);//根据主键id删除文章
     public int updateArticle(int id);//根据主键id更改文章
-    public List<Article> selectAllArticle();//查询所有投票
-    Page<Article> articlePage(Pageable pageable);
-    void addArticleAndOption(String title, List<String> contents);
+    void addArticleAndOption(String title, List<String> contents,int uid);
 
     Page<Article> listArticle(Pageable pageable);
 
@@ -28,4 +26,8 @@ public interface ArticleService {
     Page<Article> saveAll(Page<Article> articlePage);
 
     Page<Article> searchArticle(String s, Pageable pageable);
+
+    List<Article> getArticleByUId(int uid);
+
+    boolean release(int id);
 }

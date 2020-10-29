@@ -4,7 +4,7 @@ import java.security.MessageDigest;
 
 public class MD5Util {
     public static void main(String[] args) {
-        String encode = encode("123456", "utf-8");
+        String encode = encode("admin", "utf-8");
         System.out.println(encode);
     }
 

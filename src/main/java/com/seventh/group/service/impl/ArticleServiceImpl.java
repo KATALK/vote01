@@ -34,9 +34,6 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Autowired
     private ArticleRepository articleRepository;
-    @Autowired
-    private OptionRepository optionRepository;
-
 
     @Override
     public void deleteArticle(int id) {
@@ -49,21 +46,12 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public List<Article> selectAllArticle() {
-        List<Article> articleList = articleRepository.findAll();
-        return articleList;
-    }
-
-    @Override
-    public Page<Article> articlePage(Pageable pageable) {
-        return null;
-    }
-
-    @Override
-    public void addArticleAndOption(String title, List<String> contents) {
+    public void addArticleAndOption(String title, List<String> contents,int uid) {
         Article article = new Article();
         article.setCreateTime(new Date());
         article.setTitle(title);
+        article.setIsrelease(0);
+        article.setUserid(uid);
         List<Option> list = new ArrayList<>();//用来存储所有option
         for (int i=0;i<contents.size();i++){
             Option option = new Option();
@@ -109,4 +97,19 @@ public class ArticleServiceImpl implements ArticleService {
     public Page<Article> searchArticle(String s, Pageable pageable) {
         return articleRepository.SearchArticle(s,pageable);
     }
+
+    @Override
+    public List<Article> getArticleByUId(int uid) {
+        return articleRepository.getArticleByUId(uid);
+    }
+
+    @Override
+    public boolean release(int id) {
+        Article article = articleRepository.findById(id).get();
+        article.setIsrelease(1);
+        articleRepository.saveAndFlush(article);
+        return true;
+    }
+
+
 }

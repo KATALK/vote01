@@ -69,6 +69,7 @@ public class ArticleController {
      */
     @PostMapping("/addArticleAndOption")
     public String add(@RequestParam("title") String title, @RequestParam("content")List<String> contents,
+                      @RequestParam("uid")int uid,
                       HttpSession session,RedirectAttributes attributes){
 
             for (int i=0;i<contents.size();i++){
@@ -77,7 +78,7 @@ public class ArticleController {
                     attributes.addFlashAttribute("title",title);
                     return "redirect:/article.do/add"; }
             }
-            articleService.addArticleAndOption(title,contents);
+            articleService.addArticleAndOption(title,contents,uid);
             return "redirect:/user.do/index";
     }
 
@@ -95,11 +96,10 @@ public class ArticleController {
      * @param articleId
      * @return
      */
-    @ResponseBody
     @RequestMapping("/deleteArticle/{id}")
     public String delete(@PathVariable("id") int articleId){
         articleService.deleteArticle(articleId);
-        return "success";
+        return "redirect:/admin.do/selectAllArticle";
     }
 
 
@@ -118,4 +118,30 @@ public class ArticleController {
         return "redirect:/user.do/index";
     }
 
+    @GetMapping("/toUserArt/{uid}")
+    public String toUserArt(@PathVariable("uid")int uid,Model model){
+        List<Article> list = articleService.getArticleByUId(uid);
+        if (null==list){
+            model.addAttribute("list",null);
+        }else {
+            model.addAttribute("list",list);
+        }
+        return "userArt";
+    }
+
+    @GetMapping("/release/{id}")
+    public String release(@PathVariable("id")int id,HttpSession session){
+        boolean flag = articleService.release(id);
+        User user = (User) session.getAttribute("user");
+        int uid = user.getId();
+        return "redirect:/article.do/toUserArt/"+uid;
+    }
+
+    @GetMapping("/del/{id}")
+    public String deleteByid(@PathVariable("id")int id,HttpSession session){
+        articleService.deleteArticle(id);
+        User user = (User) session.getAttribute("user");
+        int uid = user.getId();
+        return "redirect:/article.do/toUserArt/"+uid;
+    }
 }

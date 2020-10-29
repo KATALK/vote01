@@ -24,6 +24,11 @@
             form.password.focus();
             return false;
         }
+        if(form.password.value!=form.password1.value){
+            alert("两次输入密码不正确!")
+            form.password1.focus();
+            return false;
+        }
         console.log(form.password.value.length);
         return true;
     }
@@ -42,6 +47,10 @@
                 <div>
                     <span><label>密码</label></span>
                     <span><input type="password" name="password" class="password"></span>
+                </div>
+                <div>
+                    <span><label>再次输入密码</label></span>
+                    <span><input type="password" name="password1" class="password1"></span>
                 </div>
                 <div class="sign">
                     <input type="submit" value="注册" class="submit" />
